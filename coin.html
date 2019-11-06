@@ -1,7 +1,8 @@
 
 
-
+Moedas na máquina: <input id="total"><br>
 Valor do Troco: <input id="change">
+
 <div>Mínimo de moedas: <span id="result"></span></div>
 
 
@@ -9,9 +10,11 @@ Valor do Troco: <input id="change">
 <script>
     
     function getChange(amount) {
+       
         amount *= 100; // Convert to number of cents
-        var denominations = [1, 2, 5, 10, 20, 50, 100]; // cents
-        console.log(denominations);
+        var temp = document.getElementById("total").value;
+        var denominations = temp.split(',');
+        //var denominations = [1, 2, 5, 10, 20, 50, 100]; // cents
         var result = [];
         while (amount > 0) {
             var coin = denominations.pop(); // Get next greatest coin
