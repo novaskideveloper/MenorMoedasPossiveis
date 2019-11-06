@@ -1,34 +1,34 @@
-
-
-Moedas na máquina: <input id="total"><br>
-Valor do Troco: <input id="change">
-
-<div>Mínimo de moedas: <span id="result"></span></div>
-
-
-
+<h2>Digite primeiro quais moedas tem na máquina e depois o valor de troco</h2>
+<p><b>Moedas na máquina: </b></p> <input id="total" placeholder="Exemplo: 1,5,10,25,50,100"><br>
+*Digite o valor das moedas de forma crescente.
+<br><br>
+<p><b>Valor do troco: </b></p> <input id="change" placeholder="Exemplo: 3.55"><br>
+*Digite o separador com Ponto.<br><br>
+<div>
+    <p><b>Mínimo de moedas: </b></p><span id="result"></span>
+</div>
 <script>
-    
+
     function getChange(amount) {
-       
+
         amount *= 100; // Convert to number of cents
         var temp = document.getElementById("total").value;
         var denominations = temp.split(',');
-        //var denominations = [1, 2, 5, 10, 20, 50, 100]; // cents
+
         var result = [];
         while (amount > 0) {
             var coin = denominations.pop(); // Get next greatest coin
-            var count = Math.floor(amount/coin); // See how many times I need that coin
+            var count = Math.floor(amount / coin); // See how many times I need that coin
             amount -= count * coin; // Reduce the amount with that number of coins
-            if (count) result.push([coin/100, count]); // Store count & coin
+            if (count) result.push([coin / 100, count]); // Store count & coin
         }
         return result;
     }
-    
+
     // I/O management
-    
+
     change.oninput = function () {
         var coins = getChange(this.value);
         result.textContent = coins.map(([coin, count]) => `${count} x R$${coin}`).join(" + ");
     };
-    </script>
+</script>
