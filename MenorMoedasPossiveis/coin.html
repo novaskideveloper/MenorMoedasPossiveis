@@ -1,0 +1,31 @@
+
+
+
+Valor do Troco: <input id="change">
+<div>Mínimo de moedas: <span id="result"></span></div>
+
+
+
+<script>
+    
+    function getChange(amount) {
+        amount *= 100; // Convert to number of cents
+        var denominations = [1, 2, 5, 10, 20, 50, 100]; // cents
+        console.log(denominations);
+        var result = [];
+        while (amount > 0) {
+            var coin = denominations.pop(); // Get next greatest coin
+            var count = Math.floor(amount/coin); // See how many times I need that coin
+            amount -= count * coin; // Reduce the amount with that number of coins
+            if (count) result.push([coin/100, count]); // Store count & coin
+        }
+        return result;
+    }
+    
+    // I/O management
+    
+    change.oninput = function () {
+        var coins = getChange(this.value);
+        result.textContent = coins.map(([coin, count]) => `${count} x R$${coin}`).join(" + ");
+    };
+    </script>
